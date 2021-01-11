@@ -8,36 +8,37 @@ const promptUser = () => {
     return inquirer.prompt([
         {
             type: "input",
-            message: "What is the name of your project?",
-            name: "title"
+            name: "title",
+            message: "What is the name of your project?"
         },
         {
             type: "input",
-            message: "Enter a description of your project",
-            name: "description"
+            name: "description",
+            message: "Enter a description of your project"
         },
         {
             type: "input",
-            message: "What are the installation instructions for this project. Enter None if there aren't any.",
-            name: "installation"
+            name: "installation",
+            message: "What are the installation instructions for this project. Enter None if there aren't any."
         },
         {
             type: "input",
-            message: "How would you like your application to be used?",
-            name: "usage"
+            name: "usage",
+            message: "How would you like your application to be used?"
         },
         {
             type: "input",
-            message: "Who contributed on this project?",
-            name: "contribution"
+            name: "contribution",
+            message: "Who contributed to this project?"
         },
         {
             type: "input",
-            message: "What are the test instructions?",
-            name: "test"
+            name: "test",
+            message: "What are the test instructions?"
         },
         {
             type: "checkbox",
+            name: "license",
             message: "Select a license",
             choices: [
                 "Apache",
@@ -45,22 +46,16 @@ const promptUser = () => {
                 "ISC",
                 "GNU GPLv3"
             ],
-            name: "license"
         },
         {
             type: "input",
-            message: "What ais your GitHub username?",
-            name: "username"
+            name: "username",
+            message: "What is your GitHub username?"
         },
         {
             type: "input",
-            message: "What is your email address?",
-            name: "email"
-        },
-        {
-            type: "input",
-            message: "What are the test instructions?",
-            name: "test"
+            name: "email",
+            message: "What is your email address?"
         },
     ]);
 
@@ -68,11 +63,50 @@ const promptUser = () => {
 
 //Function to generate Markdown
 const generateMarkdown = (response) => {
+    return `
+# ${response.title}
 
-};
+# Table of Contents
+
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribution](#contribution)
+- [Test](#test)
+- [License](#license)
+- [Questions](#questions)
+
+## Description:
+![License](https://img.shields.io/badge/License-${response.license}-blue.svg "License Badge")
+
+    ${response.description}
+## Installation:
+    ${response.installation}
+## Usage:
+    ${response.usage}
+## Contribution:
+    ${response.contribution} 
+## Test:
+    ${response.test}   
+## License:
+    For more information about the license, click on the link below.
+
+-  [License](https://opensource.org/licenses/${response.license})
+
+## Questions:
+    To see more of my work on GitHub you can go to my GitHub page with the following link:
+
+-  [GitHub Profile](https://github.com/${response.username})
+
+For any questions please feel free to email me: ${response.email}.
+`;
+
+}
 
 //Function that initializes the program
 const init = async () => {
+
+    const response = await promptUser();
 
 };
 
