@@ -1,6 +1,8 @@
 
 # README Generator
 
+Used this application to generate this README file.
+
 # Table of Contents
 
 - [Description](#description)
