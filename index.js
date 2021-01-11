@@ -1,7 +1,10 @@
-//Initialize requirements
+// Initialize requirements
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
+
+// Variable to write the file
+const writeFileAsync = util.promisify(fs.writeFile);
 
 //Function containing questions
 const promptUser = () => {
@@ -61,7 +64,7 @@ const promptUser = () => {
 
 };
 
-//Function to generate Markdown
+// Function to generate Markdown
 const generateMarkdown = (response) => {
     return `
 # ${response.title}
@@ -103,12 +106,18 @@ For any questions please feel free to email me: ${response.email}.
 
 }
 
-//Function that initializes the program
+// Function that initializes the program
 const init = async () => {
 
     const response = await promptUser();
 
+    const readMe = generateMarkdown(response);
+
+    // Executes the writeFile method to write the actual README file
+    await writeFileAsync("README.md", readMe);
+
+
 };
 
-//Call the initialize function
+// Call the initialize function
 init();
