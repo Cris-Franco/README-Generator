@@ -108,15 +108,17 @@ For any questions please feel free to email me: ${response.email}.
 
 // Function that initializes the program
 const init = async () => {
+    try {
+        const response = await promptUser();
 
-    const response = await promptUser();
+        const readMe = generateMarkdown(response);
 
-    const readMe = generateMarkdown(response);
-
-    // Executes the writeFile method to write the actual README file
-    await writeFileAsync("README.md", readMe);
-
-
+        // Executes the writeFile method to write the actual README file
+        await writeFileAsync("README.md", readMe);
+        console.log("Success");
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 // Call the initialize function
